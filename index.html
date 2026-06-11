@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Invitación digital de bodas para Valeria Gómez & Sebastián Rojas. Acompáñanos a celebrar nuestro día especial el Sábado 12 de Diciembre de 2026.">
+    <title>Valeria & Sebastián — Nuestra Boda</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Welcome Modal (Luxury Envelope) -->
+    <div id="welcome-modal" class="welcome-modal">
+        <div class="welcome-overlay"></div>
+        <div class="welcome-content">
+            <h1 class="welcome-names">Valeria & Sebastián</h1>
+            <p class="welcome-phrase">Nuestro para siempre comienza aquí</p>
+            
+            <button id="btn-open-envelope" class="btn-envelope-pulse" aria-label="Abrir invitación">
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring delay-1"></div>
+                <div class="envelope-circle">
+                    <!-- SVG of elegant envelope with wax seal -->
+                    <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Envelope base -->
+                        <path d="M15 30 H85 V75 H15 Z" fill="#FAF6F0" stroke="#C5A880" stroke-width="2" stroke-linejoin="round"/>
+                        <!-- Envelope flap lines -->
+                        <path d="M15 30 L50 55 L85 30" fill="none" stroke="#C5A880" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M15 75 L42 50" fill="none" stroke="#C5A880" stroke-width="2"/>
+                        <path d="M85 75 L58 50" fill="none" stroke="#C5A880" stroke-width="2"/>
+                        <!-- Wax seal -->
+                        <circle cx="50" cy="53" r="12" fill="url(#grad-wax)" filter="url(#shadow-wax)"/>
+                        <path d="M47 50 C49 48 51 48 53 50 C55 52 55 54 53 56 C51 58 49 58 47 56 C45 54 45 52 47 50 Z" fill="#9E7D4E"/>
+                        <defs>
+                            <radialGradient id="grad-wax" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#DFBA73" />
+                                <stop offset="70%" stop-color="#C5A880" />
+                                <stop offset="100%" stop-color="#9E7D4E" />
+                            </radialGradient>
+                            <filter id="shadow-wax" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000" flood-opacity="0.3"/>
+                            </filter>
+                        </defs>
+                    </svg>
+                </div>
+            </button>
+            
+            <p class="welcome-date">Sábado 12 de Diciembre - 2026</p>
+        </div>
+    </div>
+
+    <!-- Background Music Audio Tag -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <!-- Music Control Floating Button -->
+    <button id="btn-music-toggle" class="btn-music-toggle hidden" aria-label="Controlar música">
+        <div class="music-bars">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <i class="fas fa-music music-icon-off"></i>
+    </button>
+
+    <!-- Header / Navigation Bar -->
+    <header class="main-header">
+        <div class="logo">V & S</div>
+        <nav class="nav-menu">
+            <a href="#hero">Inicio</a>
+            <a href="#nuestra-historia">Historia</a>
+            <a href="#galeria">Galería</a>
+            <a href="#evento">Detalles</a>
+            <a href="#cronograma">Programa</a>
+            <a href="#confirmacion">Confirmar</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-parallax-bg" style="background-image: url('assets/hero-bg.png');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-foliage animate-on-scroll fade-in-down">
+                <!-- SVG foliage accent -->
+                <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 10 C55 30 75 45 90 50 C75 55 55 70 50 90 C45 70 25 55 10 50 C25 45 45 30 50 10 Z" fill="rgba(197, 168, 128, 0.4)"/>
+                </svg>
+            </div>
+            <p class="hero-subtitle animate-on-scroll fade-in">NOS CASAMOS</p>
+            <h1 class="hero-title animate-on-scroll fade-in-up">Valeria & Sebastián</h1>
+            <div class="divider-gold animate-on-scroll fade-in">
+                <span class="gold-line-long"></span>
+            </div>
+            <p class="hero-date animate-on-scroll fade-in-up">Sábado, 12 de Diciembre de 2026</p>
+            <a href="#confirmacion" class="btn-primary hero-btn animate-on-scroll fade-in-up">
+                <span>CONFIRMAR ASISTENCIA</span>
+            </a>
+            <div class="scroll-indicator animate-bounce">
+                <span>Deslizar</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Timer Section -->
+    <section id="countdown" class="countdown-section section-padding">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <p class="section-subtitle">CUENTA REGRESIVA</p>
+                <h2 class="section-title">Faltan Solo</h2>
+                <div class="divider-gold"><span class="gold-leaf"></span></div>
+            </div>
+            
+            <div class="countdown-container animate-on-scroll fade-in-up">
+                <div class="countdown-item">
+                    <span id="days" class="countdown-num">00</span>
+                    <span class="countdown-label">Días</span>
+                </div>
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <span id="hours" class="countdown-num">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <span id="minutes" class="countdown-num">00</span>
+                    <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <span id="seconds" class="countdown-num">00</span>
+                    <span class="countdown-label">Segundos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section id="nuestra-historia" class="story-section section-padding">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <p class="section-subtitle">NUESTRA HISTORIA</p>
+                <h2 class="section-title">El Camino Hacia el "Sí, Acepto"</h2>
+                <div class="divider-gold"><span class="gold-leaf"></span></div>
+                <p class="story-intro-text text-center animate-on-scroll fade-in">
+                    "Todo comenzó con una conversación que duró hasta la madrugada. Lo que parecía una simple coincidencia se convirtió en una historia llena de aventuras, aprendizajes y momentos inolvidables. Después de cinco años juntos, hemos decidido comenzar nuestro capítulo más importante y queremos compartir este día con las personas que más queremos."
+                </p>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline">
+                <!-- Evento 1 -->
+                <div class="timeline-item animate-on-scroll fade-in-left">
+                    <div class="timeline-marker">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="timeline-content card-luxury">
+                        <span class="timeline-date">Noviembre 2021</span>
+                        <h3 class="timeline-title">Primer Encuentro</h3>
+                        <p class="timeline-text">Una coincidencia, una mirada y una conversación interminable que duró hasta el amanecer. Aquella noche supimos que algo especial estaba comenzando.</p>
+                    </div>
+                </div>
+
+                <!-- Evento 2 -->
+                <div class="timeline-item animate-on-scroll fade-in-right">
+                    <div class="timeline-marker">
+                        <i class="fas fa-ring"></i>
+                    </div>
+                    <div class="timeline-content card-luxury">
+                        <span class="timeline-date">Junio 2025</span>
+                        <h3 class="timeline-title">El Compromiso</h3>
+                        <p class="timeline-text">En un viaje soñado, rodeados de naturaleza y bajo un cielo estrellado, nos prometimos caminar de la mano para siempre. ¡Dijo que sí!</p>
+                    </div>
+                </div>
+
+                <!-- Evento 3 -->
+                <div class="timeline-item animate-on-scroll fade-in-left">
+                    <div class="timeline-marker">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="timeline-content card-luxury">
+                        <span class="timeline-date">12 Diciembre 2026</span>
+                        <h3 class="timeline-title">La Boda</h3>
+                        <p class="timeline-text">Hoy escribimos el capítulo más esperado. Acompañados de nuestra familia y amigos, daremos inicio a nuestra vida como esposos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="gallery-section section-padding">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <p class="section-subtitle">GALERÍA DE FOTOS</p>
+                <h2 class="section-title">Nuestros Momentos</h2>
+                <div class="divider-gold"><span class="gold-leaf"></span></div>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- Photo 1 -->
+                <div class="gallery-item animate-on-scroll fade-in-up" data-index="1">
+                    <img src="assets/gallery_1.png" alt="Valeria y Sebastián 1" loading="lazy">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <!-- Photo 2 -->
+                <div class="gallery-item animate-on-scroll fade-in-up" data-index="2">
+                    <img src="assets/gallery_2.png" alt="Valeria y Sebastián 2" loading="lazy">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <!-- Photo 3 -->
+                <div class="gallery-item animate-on-scroll fade-in-up" data-index="3">
+                    <img src="assets/gallery_3.png" alt="Valeria y Sebastián 3" loading="lazy">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <!-- Photo 4 -->
+                <div class="gallery-item animate-on-scroll fade-in-up" data-index="4">
+                    <img src="assets/gallery_4.png" alt="Valeria y Sebastián 4" loading="lazy">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <!-- Photo 5 -->
+                <div class="gallery-item animate-on-scroll fade-in-up" data-index="5">
+                    <img src="assets/gallery_5.png" alt="Valeria y Sebastián 5" loading="lazy">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <!-- Photo 6 -->
+                <div class="gallery-item animate-on-scroll fade-in-up" data-index="6">
+                    <img src="assets/gallery_6.png" alt="Valeria y Sebastián 6" loading="lazy">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <!-- Photo 7 -->
+                <div class="gallery-item animate-on-scroll fade-in-up" data-index="7">
+                    <img src="assets/gallery_7.png" alt="Valeria y Sebastián 7" loading="lazy">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <!-- Photo 8 -->
+                <div class="gallery-item animate-on-scroll fade-in-up" data-index="8">
+                    <img src="assets/gallery_8.png" alt="Valeria y Sebastián 8" loading="lazy">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Lightbox for Gallery -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <button class="lightbox-prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-next" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Imagen ampliada">
+        </div>
+    </div>
+
+    <!-- Event Info & Map Section -->
+    <section id="evento" class="event-section section-padding">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <p class="section-subtitle">DÓNDE Y CUÁNDO</p>
+                <h2 class="section-title">Detalles del Evento</h2>
+                <div class="divider-gold"><span class="gold-leaf"></span></div>
+            </div>
+
+            <div class="event-cards-container">
+                <!-- Card Ceremonia -->
+                <div class="event-card animate-on-scroll fade-in-up">
+                    <div class="event-icon-container">
+                        <i class="fas fa-church"></i>
+                    </div>
+                    <h3>Ceremonia Religiosa</h3>
+                    <div class="divider-gold-small"></div>
+                    <p class="event-detail-item"><i class="far fa-clock"></i> <strong>Hora:</strong> 5:00 PM</p>
+                    <p class="event-detail-item"><i class="fas fa-map-marker-alt"></i> <strong>Lugar:</strong> Hacienda Los Olivos</p>
+                    <p class="event-detail-item-address">Lurín, Lima, Perú</p>
+                </div>
+
+                <!-- Card Recepción -->
+                <div class="event-card animate-on-scroll fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="event-icon-container">
+                        <i class="fas fa-glass-cheers"></i>
+                    </div>
+                    <h3>Recepción y Fiesta</h3>
+                    <div class="divider-gold-small"></div>
+                    <p class="event-detail-item"><i class="far fa-clock"></i> <strong>Hora:</strong> 7:00 PM</p>
+                    <p class="event-detail-item"><i class="fas fa-map-marker-alt"></i> <strong>Lugar:</strong> Salón Principal</p>
+                    <p class="event-detail-item-address">Hacienda Los Olivos, Lurín</p>
+                </div>
+            </div>
+
+            <!-- Map Integration -->
+            <div class="map-container animate-on-scroll fade-in-up">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15585.127506977823!2d-76.8833989!3d-12.263056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b98a3e74db37%3A0xc0cf4b8ad3f1a238!2sHacienda%20Los%20Olivos!5e0!3m2!1ses-419!2spe!4v1680000000000!5m2!1ses-419!2spe" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <div class="map-action">
+                    <a href="https://maps.app.goo.gl/wJdSwJdSwJdSwJdSw" target="_blank" rel="noopener" class="btn-primary shimmer">
+                        <i class="fas fa-map-marked-alt"></i> <span>VER UBICACIÓN EN GOOGLE MAPS</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dress Code Section -->
+    <section id="dress-code" class="dress-code-section section-padding">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <p class="section-subtitle">DRESS CODE</p>
+                <h2 class="section-title">Código de Vestimenta</h2>
+                <div class="divider-gold"><span class="gold-leaf"></span></div>
+                <h3 class="dress-code-type">Elegante Formal</h3>
+            </div>
+
+            <div class="dress-code-options">
+                <!-- Hombres -->
+                <div class="dress-card animate-on-scroll fade-in-left">
+                    <div class="dress-icon-wrapper">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h4>Caballeros</h4>
+                    <p class="dress-desc">Traje Oscuro</p>
+                    <span class="dress-subtext">Terno completo de preferencia negro, azul marino o gris carbón. Corbata obligatoria.</span>
+                </div>
+
+                <!-- Mujeres -->
+                <div class="dress-card animate-on-scroll fade-in-right">
+                    <div class="dress-icon-wrapper">
+                        <i class="fas fa-female"></i>
+                    </div>
+                    <h4>Damas</h4>
+                    <p class="dress-desc">Vestido Largo</p>
+                    <span class="dress-subtext">Vestido largo formal de noche. Reservar el color blanco y beige exclusivamente para la novia.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline / Cronograma Section -->
+    <section id="cronograma" class="cronograma-section section-padding">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <p class="section-subtitle">PLANIFICACIÓN</p>
+                <h2 class="section-title">Cronograma del Día</h2>
+                <div class="divider-gold"><span class="gold-leaf"></span></div>
+            </div>
+
+            <div class="cronograma-list">
+                <!-- 5:00 PM -->
+                <div class="cronograma-item animate-on-scroll fade-in-up">
+                    <div class="crono-time">5:00 PM</div>
+                    <div class="crono-dot"></div>
+                    <div class="crono-content card-luxury">
+                        <i class="fas fa-ring crono-icon"></i>
+                        <div>
+                            <h4>Ceremonia</h4>
+                            <p>El momento del "Sí, acepto". Se solicita puntualidad a los invitados.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6:00 PM -->
+                <div class="cronograma-item animate-on-scroll fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="crono-time">6:00 PM</div>
+                    <div class="crono-dot"></div>
+                    <div class="crono-content card-luxury">
+                        <i class="fas fa-cocktail crono-icon"></i>
+                        <div>
+                            <h4>Cóctel de Bienvenida</h4>
+                            <p>Brindis inicial, fotos y aperitivos mientras los novios realizan su sesión fotográfica.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7:00 PM -->
+                <div class="cronograma-item animate-on-scroll fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="crono-time">7:00 PM</div>
+                    <div class="crono-dot"></div>
+                    <div class="crono-content card-luxury">
+                        <i class="fas fa-glass-cheers crono-icon"></i>
+                        <div>
+                            <h4>Ingreso a la Recepción</h4>
+                            <p>Apertura del salón principal y primer baile de casados.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8:00 PM -->
+                <div class="cronograma-item animate-on-scroll fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="crono-time">8:00 PM</div>
+                    <div class="crono-dot"></div>
+                    <div class="crono-content card-luxury">
+                        <i class="fas fa-utensils crono-icon"></i>
+                        <div>
+                            <h4>Cena de Gala</h4>
+                            <p>Cena gourmet, discursos de los padrinos y momentos especiales en las mesas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10:00 PM -->
+                <div class="cronograma-item animate-on-scroll fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="crono-time">10:00 PM</div>
+                    <div class="crono-dot"></div>
+                    <div class="crono-content card-luxury">
+                        <i class="fas fa-music crono-icon"></i>
+                        <div>
+                            <h4>Inicio de la Fiesta</h4>
+                            <p>DJ en vivo, barra libre y baile hasta el amanecer para celebrar el amor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gift / Envelope Rain Section -->
+    <section id="lluvia-sobres" class="gift-section section-padding">
+        <div class="container text-center">
+            <div class="section-header animate-on-scroll">
+                <p class="section-subtitle">DETALLES Y REGALOS</p>
+                <h2 class="section-title">Lluvia de Sobres</h2>
+                <div class="divider-gold"><span class="gold-leaf"></span></div>
+            </div>
+
+            <div class="gift-card card-luxury animate-on-scroll fade-in-up">
+                <i class="fas fa-envelope-open-text gift-icon"></i>
+                <p class="gift-message">
+                    "Su presencia es nuestro mejor regalo. Si desean tener un detalle con nosotros, agradeceremos una contribución en nuestra lluvia de sobres."
+                </p>
+                
+                <div class="bank-accounts">
+                    <div class="bank-account-item">
+                        <span><strong>Banco BCP (Soles):</strong> 193-98765432-0-88</span>
+                        <button class="btn-copy-account" data-clipboard="193-98765432-0-88" title="Copiar cuenta">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="bank-account-item">
+                        <span><strong>CCI BCP:</strong> 002-1939876543208805</span>
+                        <button class="btn-copy-account" data-clipboard="002-1939876543208805" title="Copiar CCI">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="bank-account-item">
+                        <span><strong>Yape / Plin (Valeria G.):</strong> +51 922344540</span>
+                        <button class="btn-copy-account" data-clipboard="+51922344540" title="Copiar número">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="copy-toast" class="copy-toast">¡Copiado con éxito!</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confirmation Section -->
+    <section id="confirmacion" class="confirm-section section-padding">
+        <div class="container text-center">
+            <div class="section-header animate-on-scroll">
+                <p class="section-subtitle">R.S.V.P</p>
+                <h2 class="section-title">Confirmar Asistencia</h2>
+                <div class="divider-gold"><span class="gold-leaf"></span></div>
+                <p class="confirm-deadline-text">Por favor confirma tu asistencia antes del 15 de Noviembre de 2026</p>
+            </div>
+
+            <div class="confirm-action-box animate-on-scroll fade-in-up">
+                <p class="confirm-info">Haz clic en el botón de abajo para enviarnos un mensaje de WhatsApp directo y confirmar tu asistencia en segundos.</p>
+                <a href="https://wa.me/51922344540?text=Hola%20Valeria%20y%20Sebasti%C3%B3n%2C%20confirmo%20mi%20asistencia%20a%20su%20boda." target="_blank" rel="noopener" class="btn-whatsapp shimmer">
+                    <i class="fab fa-whatsapp"></i> <span>CONFIRMAR POR WHATSAPP</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-foliage">
+            <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 10 C55 30 75 45 90 50 C75 55 55 70 50 90 C45 70 25 55 10 50 C25 45 45 30 50 10 Z" fill="rgba(197, 168, 128, 0.3)"/>
+            </svg>
+        </div>
+        <p class="footer-thanks">"Gracias por acompañarnos en este día tan especial."</p>
+        <p class="footer-names">Valeria & Sebastián</p>
+        <p class="footer-date">12 . 12 . 2026</p>
+        <div class="footer-credit">&copy; 2026 V&S. Hecho con amor.</div>
+    </footer>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>
