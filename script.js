@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
             isMusicPlaying = false;
         });
 
-        // Trigger animations for the Hero elements after opening
+        // Trigger Hero entry animations
         setTimeout(() => {
-            triggerScrollAnimations();
+            startHeroAnimations();
         }, 800);
     });
 
@@ -101,15 +101,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // --- 3. HERO PARALLAX EFFECT ---
+    // --- 3. GSAP SCROLL STORYTELLING & PARALLAX ---
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Dynamic Sparkles Generator
+    createSparkles();
+
+    // Hero background Parallax and Zoom
     const heroBg = document.querySelector('.hero-parallax-bg');
-    
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        if (heroBg) {
-            // Translate the background slowly relative to scroll
-            heroBg.style.transform = `scale(1.05) translateY(${scrolled * 0.35}px)`;
-        }
+    if (heroBg) {
+        gsap.fromTo(heroBg, 
+            { scale: 1.2, y: '0%' },
+            { 
+                scale: 1.05, 
+                y: '20%',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '#hero',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true
+                }
+            }
+        );
+    }
+
+    // Parallax Leaves based on data-speed
+    document.querySelectorAll('.parallax-leaf').forEach(leaf => {
+        const speed = parseFloat(leaf.getAttribute('data-speed')) || 0.1;
+        gsap.to(leaf, {
+            y: () => window.innerHeight * speed,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: leaf.closest('section') || leaf.parentElement,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true
+            }
+        });
     });
 
 
@@ -151,39 +180,171 @@ document.addEventListener('DOMContentLoaded', () => {
     const countdownInterval = setInterval(updateCountdown, 1000);
 
 
-    // --- 5. ANIMATE ON SCROLL (INTERSECTION OBSERVER) ---
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
-    
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15 // trigger when 15% of element is visible
-    };
+    // --- 5. GSAP SCROLL TRIGGERS ---
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animated');
-                // stop observing once animated
-                observer.unobserve(entry.target);
+    // Split text into spans for letter by letter animation
+    function splitTextIntoSpans(element) {
+        const text = element.innerText;
+        element.innerHTML = '';
+        for (let char of text) {
+            const span = document.createElement('span');
+            span.classList.add('char');
+            if (char === ' ') {
+                span.innerHTML = '&nbsp;';
+            } else {
+                span.innerText = char;
             }
-        });
-    }, observerOptions);
+            element.appendChild(span);
+        }
+    }
 
-    animatedElements.forEach(element => {
-        observer.observe(element);
-    });
+    // Hero Entry Animation (called when welcome modal closes)
+    function startHeroAnimations() {
+        const heroTitle = document.querySelector('.hero-title');
+        if (heroTitle) {
+            splitTextIntoSpans(heroTitle);
+            gsap.fromTo(heroTitle.querySelectorAll('.char'), 
+                { opacity: 0, y: 50, rotateX: -60 },
+                { opacity: 1, y: 0, rotateX: 0, stagger: 0.04, duration: 1, ease: "back.out(1.7)" }
+            );
+        }
+        gsap.fromTo('.hero-subtitle', { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' });
+        gsap.fromTo('.hero-date', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.6 });
+        gsap.fromTo('.hero-btn', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.5)', delay: 0.8 });
+    }
 
-    // Fallback to trigger visible elements immediately (like when starting below header)
-    function triggerScrollAnimations() {
-        const triggerBottom = window.innerHeight * 0.9;
-        animatedElements.forEach(element => {
-            const boxTop = element.getBoundingClientRect().top;
-            if (boxTop < triggerBottom) {
-                element.classList.add('animated');
+    // Floating Sparkles Generator
+    function createSparkles() {
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            const sparkleContainer = document.createElement('div');
+            sparkleContainer.classList.add('sparkle-particles');
+            section.appendChild(sparkleContainer);
+            
+            // 8 particles per section
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.animationDelay = `${Math.random() * 8}s`;
+                sparkle.style.animationDuration = `${6 + Math.random() * 8}s`;
+                sparkleContainer.appendChild(sparkle);
             }
         });
     }
+
+    // Odometer/Count-Up Effect on Countdown trigger
+    ScrollTrigger.create({
+        trigger: '#countdown',
+        start: 'top 85%',
+        onEnter: () => {
+            const nums = document.querySelectorAll('.countdown-num');
+            nums.forEach(num => {
+                const targetVal = parseInt(num.innerText) || 0;
+                if (targetVal > 0) {
+                    let currentVal = 0;
+                    const duration = 1200; // 1.2s
+                    const stepTime = Math.max(Math.floor(duration / targetVal), 15);
+                    const interval = setInterval(() => {
+                         currentVal++;
+                         if (currentVal >= targetVal) {
+                             num.innerText = String(targetVal).padStart(2, '0');
+                             clearInterval(interval);
+                         } else {
+                             num.innerText = String(currentVal).padStart(2, '0');
+                         }
+                    }, stepTime);
+                 }
+            });
+        },
+        once: true
+    });
+
+    // Timeline Alternating Slide-Ins
+    gsap.utils.toArray('.timeline-item').forEach(item => {
+        const isLeft = item.classList.contains('fade-in-left');
+        gsap.from(item, {
+            opacity: 0,
+            x: isLeft ? -100 : 100,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: item,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+            }
+        });
+    });
+
+    // Gallery Album Staggered Reveal
+    gsap.from('.gallery-item', {
+        opacity: 0,
+        scale: 0.8,
+        y: 50,
+        stagger: 0.08,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+            trigger: '.gallery-grid',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+        }
+    });
+
+    // Details Cards Entrance
+    gsap.from('.event-card', {
+        opacity: 0,
+        y: 60,
+        stagger: 0.15,
+        duration: 1,
+        ease: 'back.out(1.2)',
+        scrollTrigger: {
+            trigger: '.event-cards-container',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+        }
+    });
+
+    // Map Curtain Reveal
+    ScrollTrigger.create({
+        trigger: '.map-reveal-wrapper',
+        start: 'top 80%',
+        onEnter: () => {
+            const wrap = document.querySelector('.map-reveal-wrapper');
+            if (wrap) wrap.classList.add('revealed');
+        },
+        once: true
+    });
+
+    // Dress Code Cards Entrance
+    gsap.from('.dress-card', {
+        opacity: 0,
+        scale: 0.9,
+        y: 40,
+        stagger: 0.2,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+            trigger: '.dress-code-options',
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+        }
+    });
+
+    // Cronograma Items Staggered Reveal
+    gsap.from('.cronograma-item', {
+        opacity: 0,
+        x: -45,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+            trigger: '.cronograma-list',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+        }
+    });
 
 
     // --- 6. GALLERY LIGHTBOX & TOUCH NAVIGATION ---
