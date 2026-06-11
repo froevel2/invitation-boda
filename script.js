@@ -104,6 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 3. GSAP SCROLL STORYTELLING & PARALLAX ---
     gsap.registerPlugin(ScrollTrigger);
 
+    // Remove CSS animation classes to prevent conflict with GSAP's from() animations
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        el.classList.remove('animate-on-scroll', 'fade-in-up', 'fade-in-down', 'fade-in-left', 'fade-in-right', 'fade-in');
+    });
+
     // Dynamic Sparkles Generator
     createSparkles();
 
@@ -341,6 +346,60 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: 'power2.out',
         scrollTrigger: {
             trigger: '.cronograma-list',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+        }
+    });
+
+    // Section Headers Entrance
+    gsap.utils.toArray('.section-header').forEach(header => {
+        gsap.from(header, {
+            opacity: 0,
+            y: 35,
+            duration: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: header,
+                start: 'top 90%',
+                toggleActions: 'play none none none'
+            }
+        });
+    });
+
+    // Countdown Container Entrance
+    gsap.from('.countdown-container', {
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+            trigger: '#countdown',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+        }
+    });
+
+    // Gift Card Entrance
+    gsap.from('.gift-card', {
+        opacity: 0,
+        y: 40,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+            trigger: '#lluvia-sobres',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+        }
+    });
+
+    // Confirm Action Box Entrance
+    gsap.from('.confirm-action-box', {
+        opacity: 0,
+        y: 40,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+            trigger: '#confirmacion',
             start: 'top 80%',
             toggleActions: 'play none none none'
         }
