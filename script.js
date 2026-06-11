@@ -35,7 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Trigger Hero entry animations
         setTimeout(() => {
-            startHeroAnimations();
+            if (typeof startHeroAnimations === 'function') {
+                startHeroAnimations();
+            }
+            if (typeof ScrollTrigger !== 'undefined') {
+                ScrollTrigger.refresh(); // Recalculate ScrollTrigger positions
+            }
         }, 800);
     });
 
@@ -102,12 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- 3. GSAP SCROLL STORYTELLING & PARALLAX ---
-    gsap.registerPlugin(ScrollTrigger);
+    let gsapActive = false;
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsapActive = true;
+        gsap.registerPlugin(ScrollTrigger);
 
-    // Remove CSS animation classes to prevent conflict with GSAP's from() animations
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-        el.classList.remove('animate-on-scroll', 'fade-in-up', 'fade-in-down', 'fade-in-left', 'fade-in-right', 'fade-in');
-    });
+        // Remove CSS animation classes to prevent conflict with GSAP's from() animations
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            el.classList.remove('animate-on-scroll', 'fade-in-up', 'fade-in-down', 'fade-in-left', 'fade-in-right', 'fade-in');
+        });
 
     // Dynamic Sparkles Generator
     createSparkles();
@@ -404,6 +412,13 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleActions: 'play none none none'
         }
     });
+
+    } else {
+        // Fallback in case GSAP fails to load (offline or CDN blocked)
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            el.classList.add('animated');
+        });
+    }
 
 
     // --- 6. GALLERY LIGHTBOX & TOUCH NAVIGATION ---
